@@ -188,4 +188,33 @@ public class Solutions {
         Assert.assertEquals(1, pageCount(6, 2));
     }
 
+    public static List<Integer> gradingStudents(List<Integer> grades) {
+        for(int i = 0 ; i < grades.size(); i++){
+            int grade = grades.get(i);
+            int nextMultipleOfFive =  (int) (Math.round(grade / 5.0) * 5.0);
+            if(grade >= 38 && nextMultipleOfFive - grade < 3 && nextMultipleOfFive - grade > 0){
+                grades.set(i, nextMultipleOfFive);
+            }
+        }
+        return grades;
+    }
+
+    @Test
+    public void gradingStudentsTest() {
+        ArrayList<Integer> input = new ArrayList<>();
+        ArrayList<Integer> expected = new ArrayList<>();
+
+        input.add(73);
+        input.add(67);
+        input.add(38);
+        input.add(33);
+
+        expected.add(75);
+        expected.add(67);
+        expected.add(40);
+        expected.add(33);
+
+        Assert.assertEquals(expected, gradingStudents(input));
+    }
+
 }
