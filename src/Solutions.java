@@ -1,6 +1,7 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import org.junit.Test;
 import org.junit.Assert;
@@ -87,7 +88,76 @@ public class Solutions {
         staircase(5);
     }
 
+    static boolean isAnagram(String a, String b) {
+        if(a.length() != b.length()) return false;
+        char[] aArray = a.toCharArray();
+        char[] bArray = b.toCharArray();
+        Arrays.sort(aArray);
+        Arrays.sort(bArray);
+        for(int i = 0; i < a.length(); i++){
+            if(aArray[i] != bArray[i]) return false;
+        }
+        return true;
+    }
+
+    public static void miniMaxSum(List<Integer> arr) {
+        int max = 0;
+        int min = Integer.MAX_VALUE;
+        for (int i = 0, arrSize = arr.size(); i < arrSize; i++) {
+            Integer integer = arr.get(i);
+            if (integer > max) max = integer;
+            if (integer < min) min = integer;
+        }
+        System.out.println((adder(arr, max))+ " " + (adder(arr, min)));
+    }
+
+    public static int adder(List<Integer> arr, int n){
+        boolean encounted = false;
+        int sum = 0;
+        for(int i : arr){
+            if(!encounted && i == n){
+                encounted = true;
+            }
+            else sum += i;
+        }
+        return sum;
+    }
+
+    public static String timeConversion(String s) {
+        String code = s.substring(s.length() - 2);
+        String time = s.substring(0, s.length() - 2);
+        DateFormat df = new SimpleDateFormat("hh:mm:ssaa");
+
+
+        DateFormat outputformat = new SimpleDateFormat("HH:mm:ss");
+        Date date = null;
+        String output;
+
+        try {
+            date = df.parse(time + code);
+        }
+        catch (ParseException e){
+            e.printStackTrace();
+        }
+
+        //old date format to new date format
+        output = outputformat.format(date);
+        System.out.println(output);
+
+        return output;
+    }
+
     public static void main(String[] args) {
+
+        timeConversion("12:05:45PM");
+
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        arrayList.add(1);
+        arrayList.add(2);
+        arrayList.add(3);
+        arrayList.add(4);
+        arrayList.add(5);
+        miniMaxSum(arrayList);
     }
 
 }
