@@ -176,4 +176,16 @@ public class Solutions {
         Assert.assertEquals(1, countingValleys(8, "UDDDUDUU"));
     }
 
+    public static int pageCount(int n, int p) {
+        int pageTurns = p / 2;
+        int totalTurns = n / 2;
+
+        return Math.min(pageTurns, totalTurns - pageTurns);
+    }
+
+    @Test
+    public void pageCountTest(){
+        Assert.assertEquals(1, pageCount(6, 2));
+    }
+
 }
