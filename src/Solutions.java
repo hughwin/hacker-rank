@@ -191,9 +191,11 @@ public class Solutions {
     public static List<Integer> gradingStudents(List<Integer> grades) {
         for(int i = 0 ; i < grades.size(); i++){
             int grade = grades.get(i);
-            int nextMultipleOfFive =  (int) (Math.round(grade / 5.0) * 5.0);
-            if(grade >= 38 && nextMultipleOfFive - grade < 3 && nextMultipleOfFive - grade > 0){
-                grades.set(i, nextMultipleOfFive);
+            if(grade >= 38){
+                int moduloFive = grade % 5;
+                if(5 - moduloFive <= 2) {
+                    grades.set(i, grade + 5 - moduloFive);
+                }
             }
         }
         return grades;
