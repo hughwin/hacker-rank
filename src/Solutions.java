@@ -160,4 +160,20 @@ public class Solutions {
         miniMaxSum(arrayList);
     }
 
+    public static int countingValleys(int steps, String path) {
+        char[] pathArray = path.toCharArray();
+        int level = 0, valleys = 0;
+        for(int i = 0; i < steps; i++){
+            if (pathArray[i] == 'U' && level == -1) valleys++;
+            if (pathArray[i] == 'D') level--;
+            if (pathArray[i] == 'U') level++;
+        }
+        return valleys;
+    }
+
+    @Test
+    public void countingValleysTest(){
+        Assert.assertEquals(1, countingValleys(8, "UDDDUDUU"));
+    }
+
 }
